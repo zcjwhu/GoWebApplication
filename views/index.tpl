@@ -79,7 +79,44 @@
     <div class="description">
       Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
     </div>
+
+    <div>
+      {{ if .TrueCond}}
+         true condition
+      {{ end}}
+
+      {{ if .FalseCond}}
+      {{ else}}
+      false condition
+      {{end}}
+    </div>
+    <br>
+    <div>
+      {{with .User}}
+      {{.Name}} {{.Age}} {{.Sex}}
+      {{end}}
+    </div>
+    <br>
+    <div>
+      {{ .Nums}}
+      {{range .Nums}}
+      {{.}}
+      {{end}}
+    </div>
+    <br>
+    <div>
+      {{$val:= .variable}}
+      {{$val}}
+      {{.html}}
+      {{str2html .html}}
+    </div>
+    <br>
+    <!--使用模板-->
+    <div>
+      {{template "test"}}
+    </div>
   </header>
+
   <footer>
     <div class="author">
       Official website:
@@ -93,3 +130,10 @@
   <script src="/static/js/reload.min.js"></script>
 </body>
 </html>
+
+<!--define a template-->
+{{define "test"}}
+<div>
+  this is a template test
+</div>
+{{end}}
