@@ -13,7 +13,7 @@
 <br>
 <div class="container" >
     <h1>文章列表</h1>
-    <button onclick="location.href='/topic/add'">添加文章</button>
+    <button onclick="location.href='/topic/add'" class="btn btn-default">添加文章</button>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -22,6 +22,7 @@
             <th>最后更新</th>
             <th>浏览</th>
             <th>回复数</th>
+            <th cols="2">相关操作</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,10 @@
             <td>{{.Updated}}</td>
             <td>{{.Views}}</td>
             <td>{{.ReplyCount}}</td>
+            <td>
+                <a href="/topic/view/{{.Id}}">查看</a>
+                <a href="/topic/delete/{{.Id}}">删除</a>
+            </td>
         </tr>
         {{end}}
         </tbody>
