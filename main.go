@@ -8,6 +8,9 @@ import (
 )
 
 func init()  {
+	/*
+        这一步对所有注册的模型进行注册，实际上可以对每个模型在各自的init方法里面注册，然后使用_,将包引入，会自动执行对应的init方法
+	 */
 	models.RegisterDB()
 }
 

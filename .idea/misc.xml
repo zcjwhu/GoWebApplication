@@ -39,6 +39,7 @@
     </properties>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="Go 1.8" project-jdk-type="Go SDK" />
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="masterDetails">
     <states>
       <state key="GlobalLibrariesConfigurable.UI">

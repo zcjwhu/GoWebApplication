@@ -21,10 +21,16 @@ func (c *LoginController) Get() {
 }
 
 func (c *LoginController) Post(){
+	/*
+	获取表单传递过来的值
+	 */
      	uname:=c.Input().Get("uname")
 	pwd:=c.Input().Get("pwd")
 	autoLogin:=c.Input().Get("autoLogin")=="on"
 
+	/*
+	验证用户名和密码是否正确，这里为了简单，用户名密码保存在配置文件中
+	 */
 	if beego.AppConfig.String("uname")==uname &&
 	beego.AppConfig.String("pwd")==pwd{
 		maxAge:=0

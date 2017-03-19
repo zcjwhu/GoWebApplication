@@ -1,0 +1,31 @@
+<!--头部很多页面都需要使用，使用模板来存储-->
+{{template "header"}}
+<title>添加文章-我的 Beego 博客</title>
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!--导航部分也是共用的，可以用模板存起来，另外加上一个点，目的是为了后面传数据能够传进来-->
+        {{template "navbar" .}}
+    </div>
+</div>
+<br>
+<br>
+<div class="container" >
+    <h1>文章列表</h1>
+    <form method="post" action="/topic">
+        <div class="form-group">
+            <label>文章标题：</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>文章内容：</label>
+            <textarea type="text" name="content" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <button type="submit">添加文章</button>
+    </form>
+
+</div>
+</body>
+</html>

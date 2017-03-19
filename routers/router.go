@@ -11,4 +11,6 @@ func init() {
 	beego.Router("/hello",&controllers.HelloController{})
 	beego.Router("/login",&controllers.LoginController{})
 	beego.Router("/category",&controllers.CategoryController{})
+	beego.Router("/topic",&controllers.TopicController{})
+	beego.AutoRouter(&controllers.TopicController{}) //自动路由，需要异controller来结尾
 }

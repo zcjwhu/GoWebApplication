@@ -11,7 +11,6 @@ type CategoryController struct {
 
 func (this *CategoryController) Get() {
 	op:=this.Input().Get("op")
-
 	switch op {
 	case "add":
 		name:=this.Input().Get("name")
@@ -23,11 +22,15 @@ func (this *CategoryController) Get() {
 			beego.Error(err)
 		}
 		this.Redirect("/category",301)
-		return
+		return //这些操作不需要渲染页面，直接return
 	case "del":
 		id:=this.Input().Get("id")
 		if len(id)==0{
 			break
+		}
+		err:=models.DelCategory(id)
+		if err!=nil{
+			beego.Error(err)
 		}
 		this.Redirect("/category",301)
 		return
