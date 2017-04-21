@@ -2,8 +2,8 @@ package main
 
 import (
 	"myGoApp/models"    //model数据结构模块
-	_ "myGoApp/routers"  //路由映射模块
-	"github.com/astaxie/beego"
+	_ "myGoApp/routers"  //路由映射模块    前面加上一个下划线表示的是只调用这个模块里面的init()函数去执行
+	"github.com/astaxie/beego"   //beego包  下面这两个包都会从本机gopath里面按照路径去寻找
 	"github.com/astaxie/beego/orm" //orm包
 )
 
