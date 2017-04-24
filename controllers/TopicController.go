@@ -60,6 +60,13 @@ func (this *TopicController) View(){
 
 	this.Data["Topic"]=topic
 	this.Data["Tid"]=this.Ctx.Input.Param("0")
+	replies,err:=models.GetAllReplies(this.Ctx.Input.Param("0"))
+	if err!=nil{
+		beego.Error(err)
+		this.Redirect("/",302)
+		return
+	}
+	this.Data["Replies"]=replies
 }
 
 func (this *TopicController) Modify(){

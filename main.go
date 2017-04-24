@@ -16,7 +16,7 @@ func init()  {
 
 func main() {
 	orm.Debug=true  //开发模式下设置为true,用于显示开发过程中的一些数据
-	orm.RunSyncdb("default",true,true) //false表示每次会强调删除然后重建 ，true表示是否打印相关信息
+	orm.RunSyncdb("default",false,true) //false表示每次会强调删除然后重建 ，true表示是否打印相关信息
 	beego.Run()
 }
 

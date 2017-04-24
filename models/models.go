@@ -21,7 +21,7 @@ const (
 	_SQLITE3_DRIVER ="sqlite3"    //定义数据库驱动
 )
 
-
+//分类
 type Category struct {
 	Id int64
 	Title string
@@ -31,7 +31,7 @@ type Category struct {
 	TopicCount int64
 	TopicLastUserId int64
 }
-
+//文章
 type Topic struct {
 	Id int64
 	Uid int64
@@ -47,6 +47,14 @@ type Topic struct {
 	ReplyCount int64
 	ReplyLastUserId int64
 }
+//评论
+type Comments struct {
+	Id int64
+	Tid int64
+	Name string
+	Content string `orm:size(5000)`
+	Created time.Time `orm:"index"`
+}
 
 /*
 注册数据库的相关信息
@@ -61,7 +69,7 @@ func RegisterDB(){
 	/*
 	注册模型，这里看到将category，topic的注册和对应的方法写到了一个文件，最佳设计应该是分开单独在各自的init函数中进行注册
 	 */
-	orm.RegisterModel(new(Category),new(Topic))
+	orm.RegisterModel(new(Category),new(Topic),new(Comments))
 
 	/*
 	注册数据库驱动 1.6版本之前时DR.Sqlite
@@ -217,5 +225,50 @@ func DeleteTopic(tid string)  error {
 
 	topic:=&Topic{Id:cid}
 	_,err=o.Delete(topic)
+	return err
+}
+
+func AddReply(tid,nickname,content string) error{
+	tidNum,err:=strconv.ParseInt(tid,10,64)
+	if err!=nil{
+		return  err
+	}
+	reply:=&Comments{
+		Tid:tidNum,
+		Name:nickname,
+		Content:content,
+		Created:time.Now(),
+	}
+
+	o:=orm.NewOrm()
+	_,err=o.Insert(reply)
+	return err
+}
+
+func GetAllReplies(tid string) (replies []*Comments,err error){
+	tidNum,err:=strconv.ParseInt(tid,10,64)
+	if err!=nil{
+		return nil, err
+	}
+
+	replies=make([]*Comments,0)
+
+	o:=orm.NewOrm()
+	qs:=o.QueryTable("comments")
+	_,err = qs.Filter("tid",tidNum).All(&replies)
+	return replies,err
+
+}
+
+func DeleteReply(rid string)  error {
+	cid,err:=strconv.ParseInt(rid,10,64)
+	if err!=nil{
+		return err
+	}
+
+	o:=orm.NewOrm()
+
+	reply:=&Comments{Id:cid}
+	_,err=o.Delete(reply)
 	return err
 }
